@@ -3,6 +3,7 @@ require('dotenv').config();
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import logger from 'morgan';
 import mongoose from 'mongoose';
 import routes from './routes';
 
@@ -18,6 +19,7 @@ mongoose.Promise = global.Promise;
 
 const app = express();
 
+app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
