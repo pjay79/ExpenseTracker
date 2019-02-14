@@ -1,12 +1,12 @@
 import express from 'express';
 
-const api = express.Router();
+const routes = express.Router();
 
-api.get('/', (req, res) => {
+routes.get('/', (req, res) => {
   res.send('Welcome to the Expenses Tracker!');
 });
 
-api.get('/expenses', (req, res) => {
+routes.get('/expenses', (req, res) => {
   const expenses = [
     {
       name: 'Wedding Venue',
@@ -30,4 +30,4 @@ api.get('/expenses', (req, res) => {
   res.json(expenses);
 });
 
-module.exports = api;
+module.exports = routes;

@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import api from './routes';
+import routes from './routes';
 
 const PORT = process.env.PORT || 3001;
 const MONGODB_URI =
@@ -22,7 +22,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(api);
+app.use('/', routes);
 
 app.listen(PORT, function() {
   console.log('Server is running on Port:', PORT);
