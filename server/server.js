@@ -23,6 +23,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', routes);
+app.all('*', (req, res) => {
+  console.log('Returning a 404 from the catch-all route');
+  return res.sendStatus(404);
+});
 
 app.listen(PORT, function() {
   console.log('Server is running on Port:', PORT);
