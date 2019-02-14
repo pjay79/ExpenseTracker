@@ -1,10 +1,22 @@
+require('dotenv').config();
+
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+
+const PORT = process.env.PORT || 3001;
+const MONGODB_URI =
+  process.env.MONGODB_URI || 'mongodb://localhost/mern-starter';
+
+mongoose
+  .connect(MONGODB_URI, { useNewUrlParser: true })
+  .then(() => console.log(`Database connected successfully`))
+  .catch(err => console.log(err));
+mongoose.Promise = global.Promise;
 
 const app = express();
 const router = express.Router();
-const PORT = 3001;
 
 app.use(cors());
 app.use(bodyParser.json());

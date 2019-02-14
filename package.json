@@ -1,8 +1,14 @@
 {
   "name": "expense-tracker",
   "version": "1.0.0",
+  "scripts": {
+    "load": "concurrently \"cd server && yarn start \" \"cd client && yarn start\""
+  },
   "description": "Web app built with MERN stack for expense tracking",
   "main": "index.js",
   "author": "Praveen Jayarajan",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
 }
