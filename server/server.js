@@ -13,21 +13,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 router.get('/expenses', (req, res) => {
   const expenses = [
     {
-      type: 'Wedding Venue',
+      name: 'Wedding Venue',
       vendor: 'Carousel',
-      cost: '$14,000',
+      cost: 14000,
       confirmed: true,
     },
     {
-      type: 'Reception Venue',
+      name: 'Reception Venue',
       vendor: 'Eureka SkyDeck',
-      cost: '$8,000',
+      cost: 8000,
       confirmed: true,
     },
     {
-      type: 'Photographer',
+      name: 'Photographer',
       vendor: 'Ferndara',
-      cost: '$3,700',
+      cost: 3700,
       confirmed: true,
     },
   ];
