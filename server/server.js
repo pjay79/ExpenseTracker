@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -7,13 +5,14 @@ import logger from 'morgan';
 import mongoose from 'mongoose';
 import routes from './routes';
 
+require('dotenv').config();
+
 const PORT = process.env.PORT || 3001;
-const MONGODB_URI =
-  process.env.MONGODB_URI || 'mongodb://localhost/mern-starter';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mern-starter';
 
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true })
-  .then(() => console.log(`Database connected successfully`))
+  .then(() => console.log('Database connected successfully'))
   .catch(err => console.log(err));
 mongoose.Promise = global.Promise;
 
@@ -30,6 +29,6 @@ app.all('*', (req, res) => {
   return res.sendStatus(404);
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, () => {
   console.log('Server is running on Port:', PORT);
 });
