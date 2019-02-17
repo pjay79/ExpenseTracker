@@ -1,33 +1,31 @@
 import express from 'express';
+import Expense from '../models/expense';
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => {
-  res.send('Welcome to the Expenses Tracker!');
+routes.get('/expenses', (req, res) => {
+  Expense.find((err, expenses) => {
+    if (err) {
+      console.log(err);
+    } else {
+      return res.json(expenses);
+    }
+    return null;
+  });
+  return null;
 });
 
-routes.get('/expenses', (req, res) => {
-  const expenses = [
-    {
-      name: 'Wedding Venue',
-      vendor: 'Carousel',
-      cost: 14000,
-      confirmed: true,
-    },
-    {
-      name: 'Reception Venue',
-      vendor: 'Eureka SkyDeck',
-      cost: 8000,
-      confirmed: true,
-    },
-    {
-      name: 'Photographer',
-      vendor: 'Ferndara',
-      cost: 3700,
-      confirmed: true,
-    },
-  ];
-  res.json(expenses);
+routes.post('/expenses/add', (req, res) => {
+  const expense = new Expense(req.body);
+  expense
+    .save(req.body)
+    .then((data) => {
+      res.status(200).json({ data });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send('Adding new expense failed.');
+    });
 });
 
 module.exports = routes;

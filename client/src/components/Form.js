@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
@@ -43,7 +44,6 @@ class ComposedTextField extends Component {
     vendor: '',
     cost: 0,
     confirmed: false,
-    expenses: [],
   };
 
   handleChange = (event) => {
@@ -55,7 +55,7 @@ class ComposedTextField extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const {
-      name, vendor, cost, confirmed, expenses,
+      name, vendor, cost, confirmed,
     } = this.state;
     const item = {
       name,
@@ -63,13 +63,7 @@ class ComposedTextField extends Component {
       cost,
       confirmed,
     };
-    this.setState(
-      prevState => ({ expenses: prevState.expenses + item }),
-      () => {
-        console.log(`New expense added. ${name}: ${vendor} ($${cost}, ${confirmed})`);
-        console.log(expenses);
-      },
-    );
+    axios.post('http://localhost:3001/expenses/add', item).then(res => console.log(res.data));
   };
 
   render() {

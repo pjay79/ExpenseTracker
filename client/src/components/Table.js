@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -21,62 +22,88 @@ const styles = theme => ({
   },
 });
 
-let id = 0;
-function createData(name, vendor, cost, confirmed) {
-  id += 1;
-  return {
-    id, name, vendor, cost, confirmed,
+// let id = 0;
+// function createData(name, vendor, cost, confirmed) {
+//   id += 1;
+//   return {
+//     id,
+//     name,
+//     vendor,
+//     cost,
+//     confirmed,
+//   };
+// }
+
+// const rows = [
+//   createData('Wedding venue', 'Carousel', 14000, 'true'),
+//   createData('Reception venue', 'Eureka', 8000, 'false'),
+//   createData('Photographer', 'Ferndara', 3700, 'true'),
+//   createData('Celebrant', 'TBC', 0, 'false'),
+//   createData('Iyer', 'Carrum Downs Temple', 501, 'true'),
+//   createData('Invitations', 'TBC', 0, 'false'),
+//   createData('Return Gifts', 'TBC', 0, 'false'),
+//   createData('Guest Accomodation', 'TBC', 0, 'false'),
+//   createData('Guest Transport', 'TBC', 0, 'false'),
+//   createData('Flowers', 'Jasmines', 0, 'false'),
+//   createData('Mandap', 'Bollywood Mandaps', 0, 'false'),
+//   createData('Lighting', 'Harry the Hirer', 0, 'false'),
+//   createData('Wedding Cake', 'TBC', 0, 'false'),
+//   createData('RSVP', 'Jo & Praveen', 0, 'false'),
+//   createData('Sarees', 'TBC', 0, 'false'),
+//   createData('Kurtas', 'TBC', 0, 'flase'),
+// ];
+
+class SimpleTable extends Component {
+  state = {
+    expenses: [],
   };
-}
 
-const rows = [
-  createData('Wedding venue', 'Carousel', 14000, 'true'),
-  createData('Reception venue', 'Eureka', 8000, 'false'),
-  createData('Photographer', 'Ferndara', 3700, 'true'),
-  createData('Celebrant', 'TBC', 0, 'false'),
-  createData('Iyer', 'Carrum Downs Temple', 501, 'true'),
-  createData('Invitations', 'TBC', 0, 'false'),
-  createData('Return Gifts', 'TBC', 0, 'false'),
-  createData('Guest Accomodation', 'TBC', 0, 'false'),
-  createData('Guest Transport', 'TBC', 0, 'false'),
-  createData('Flowers', 'Jasmines', 0, 'false'),
-  createData('Mandap', 'Bollywood Mandaps', 0, 'false'),
-  createData('Lighting', 'Harry the Hirer', 0, 'false'),
-  createData('Wedding Cake', 'TBC', 0, 'false'),
-  createData('RSVP', 'Jo & Praveen', 0, 'false'),
-  createData('Sarees', 'TBC', 0, 'false'),
-  createData('Kurtas', 'TBC', 0, 'flase'),
-];
+  componentDidMount() {
+    this.getExpenses();
+  }
 
-function SimpleTable(props) {
-  const { classes } = props;
+  getExpenses = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/expenses/');
+      this.setState({ expenses: response.data }, () => {
+        console.log(response.data);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">Name</TableCell>
-            <TableCell align="left">Vendor</TableCell>
-            <TableCell align="left">Confirmed</TableCell>
-            <TableCell align="right">Cost</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="left">{row.vendor}</TableCell>
-              <TableCell align="left">{row.confirmed}</TableCell>
-              <TableCell align="right">{row.cost}</TableCell>
+  render() {
+    const { classes } = this.props;
+    const { expenses } = this.state;
+
+    return (
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell align="left">Name</TableCell>
+              <TableCell align="left">Vendor</TableCell>
+              <TableCell align="left">Confirmed</TableCell>
+              <TableCell align="right">Cost</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
+          </TableHead>
+          <TableBody>
+            {expenses.map(expense => (
+              <TableRow key={expense.id}>
+                <TableCell component="th" scope="row">
+                  {expense.name}
+                </TableCell>
+                <TableCell align="left">{expense.vendor}</TableCell>
+                <TableCell align="left">{expense.confirmed}</TableCell>
+                <TableCell align="right">{expense.cost}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
+    );
+  }
 }
 
 SimpleTable.propTypes = {
