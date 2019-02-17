@@ -43,21 +43,40 @@ class ComposedTextField extends Component {
     vendor: '',
     cost: 0,
     confirmed: false,
+    expenses: [],
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value }, () => {
       console.log(this.state);
     });
   };
 
-  handleSubmit = event => {
-    alert('New expense added:');
+  handleSubmit = (event) => {
     event.preventDefault();
+    const {
+      name, vendor, cost, confirmed, expenses,
+    } = this.state;
+    const item = {
+      name,
+      vendor,
+      cost,
+      confirmed,
+    };
+    this.setState(
+      prevState => ({ expenses: prevState.expenses + item }),
+      () => {
+        console.log(`New expense added. ${name}: ${vendor} ($${cost}, ${confirmed})`);
+        console.log(expenses);
+      },
+    );
   };
 
   render() {
     const { classes } = this.props;
+    const {
+      name, vendor, cost, confirmed,
+    } = this.state;
 
     return (
       <div className={classes.container}>
@@ -69,7 +88,7 @@ class ComposedTextField extends Component {
                 type="text"
                 label="Name"
                 name="name"
-                value={this.state.name}
+                value={name}
                 onChange={this.handleChange}
               />
             </FormControl>
@@ -79,7 +98,7 @@ class ComposedTextField extends Component {
                 type="text"
                 label="Vendor"
                 name="vendor"
-                value={this.state.vendor}
+                value={vendor}
                 onChange={this.handleChange}
               />
             </FormControl>
@@ -89,7 +108,7 @@ class ComposedTextField extends Component {
                 type="text"
                 label="Cost"
                 name="cost"
-                value={this.state.cost}
+                value={cost}
                 onChange={this.handleChange}
               />
             </FormControl>
@@ -99,7 +118,7 @@ class ComposedTextField extends Component {
                 type="text"
                 label="Confirmed"
                 name="confirmed"
-                value={this.state.confirmed}
+                value={confirmed}
                 onChange={this.handleChange}
               />
             </FormControl>
@@ -122,7 +141,7 @@ class ComposedTextField extends Component {
 }
 
 ComposedTextField.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.shape({}).isRequired,
 };
 
 export default withStyles(styles)(ComposedTextField);

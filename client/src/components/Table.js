@@ -24,7 +24,9 @@ const styles = theme => ({
 let id = 0;
 function createData(name, vendor, cost, confirmed) {
   id += 1;
-  return { id, name, vendor, cost, confirmed };
+  return {
+    id, name, vendor, cost, confirmed,
+  };
 }
 
 const rows = [

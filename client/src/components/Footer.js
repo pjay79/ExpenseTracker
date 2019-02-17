@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-const styles = theme => ({
+const styles = () => ({
   appBar: {
     top: 'auto',
     bottom: 0,
