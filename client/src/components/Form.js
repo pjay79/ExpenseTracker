@@ -17,10 +17,17 @@ const styles = theme => ({
   },
   formControl: {
     margin: theme.spacing.unit * 4,
+    marginBottom: 0,
+  },
+  formWrapper: {
+    display: 'flex',
+    paddingTop: 0,
+    width: '100%',
+    justifyContent: 'center',
   },
   fabWrapper: {
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -54,7 +61,7 @@ class ComposedTextField extends Component {
 
     return (
       <div className={classes.container}>
-        <Paper>
+        <Paper className={classes.formWrapper}>
           <form onSubmit={this.handleSubmit}>
             <FormControl className={classes.formControl} variant="outlined">
               <TextField
@@ -96,7 +103,7 @@ class ComposedTextField extends Component {
                 onChange={this.handleChange}
               />
             </FormControl>
-            <Paper className={classes.fabWrapper}>
+            <div className={classes.fabWrapper}>
               <Fab
                 color="secondary"
                 aria-label="Add"
@@ -106,7 +113,7 @@ class ComposedTextField extends Component {
               >
                 <AddIcon />
               </Fab>
-            </Paper>
+            </div>
           </form>
         </Paper>
       </div>

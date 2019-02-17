@@ -1,14 +1,16 @@
 import React from 'react';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Form from './components/Form';
+import Table from './components/Table';
+import Footer from './components/Footer';
 
 const App = () => (
-  <div>
+  <React.Fragment>
     <Header />
     <Form />
+    <Table />
     <Footer />
-  </div>
+  </React.Fragment>
 );
 
 export default App;
