@@ -38,7 +38,7 @@ const styles = theme => ({
   },
 });
 
-class ComposedTextField extends Component {
+class Form extends Component {
   state = {
     name: '',
     vendor: '',
@@ -47,12 +47,10 @@ class ComposedTextField extends Component {
   };
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value }, () => {
-      console.log(this.state);
-    });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const {
       name, vendor, cost, confirmed,
@@ -63,7 +61,18 @@ class ComposedTextField extends Component {
       cost,
       confirmed,
     };
-    axios.post('http://localhost:3001/expenses/add', item).then(res => console.log(res.data));
+    try {
+      const response = await axios.post('http://localhost:3001/expenses/add', item);
+      console.log(response.data);
+      this.setState({
+        name: '',
+        vendor: '',
+        cost: 0,
+        confirmed: false,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {
@@ -134,8 +143,8 @@ class ComposedTextField extends Component {
   }
 }
 
-ComposedTextField.propTypes = {
+Form.propTypes = {
   classes: PropTypes.shape({}).isRequired,
 };
 
-export default withStyles(styles)(ComposedTextField);
+export default withStyles(styles)(Form);

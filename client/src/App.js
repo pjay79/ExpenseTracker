@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from './components/Header';
 import Form from './components/Form';
-import Table from './components/Table';
+import SimpleTable from './components/SimpleTable';
 import Footer from './components/Footer';
 
 const App = () => (
   <React.Fragment>
     <Header />
     <Form />
-    <Table />
+    <SimpleTable />
     <Footer />
   </React.Fragment>
 );
