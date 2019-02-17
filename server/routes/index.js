@@ -3,29 +3,25 @@ import Expense from '../models/expense';
 
 const routes = express.Router();
 
-routes.get('/expenses', (req, res) => {
-  Expense.find((err, expenses) => {
-    if (err) {
-      console.log(err);
-    } else {
-      return res.json(expenses);
-    }
+routes.get('/expenses', async (req, res) => {
+  try {
+    const expenses = await Expense.find();
+    return res.json(expenses);
+  } catch (err) {
+    console.log(err);
     return null;
-  });
-  return null;
+  }
 });
 
-routes.post('/expenses/add', (req, res) => {
-  const expense = new Expense(req.body);
-  expense
-    .save(req.body)
-    .then((data) => {
-      res.status(200).json({ data });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).send('Adding new expense failed.');
-    });
+routes.post('/expenses/add', async (req, res) => {
+  try {
+    const expense = await new Expense(req.body);
+    const data = await expense.save(req.body);
+    res.status(200).json({ data });
+  } catch (err) {
+    console.log(err);
+    res.status(400).send('Adding new expense failed.');
+  }
 });
 
 module.exports = routes;
