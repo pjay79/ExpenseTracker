@@ -54,14 +54,14 @@ class Form extends Component {
     const {
       name, vendor, cost, confirmed,
     } = this.state;
-    const { onSubmit } = this.props;
+    const { addExpense } = this.props;
     const item = {
       name,
       vendor,
       cost,
       confirmed,
     };
-    onSubmit(item);
+    addExpense(item);
     this.setState({
       name: '',
       vendor: '',
@@ -140,7 +140,7 @@ class Form extends Component {
 
 Form.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  addExpense: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Form);

@@ -21,11 +21,14 @@ export default class ExpenseList extends Component {
     }
   };
 
-  addExpenses = async (item) => {
+  addExpense = async (item) => {
     try {
-      await axios.post('http://localhost:3001/expenses/add', item);
+      const response = await axios.post('http://localhost:3001/expenses/add', item);
+      const { _id } = response.data.data;
+      const newExpense = item;
+      newExpense._id = _id;
       this.setState(prevState => ({
-        expenses: [...prevState.expenses, item],
+        expenses: [...prevState.expenses, newExpense],
       }));
     } catch (err) {
       console.log(err);
@@ -37,7 +40,7 @@ export default class ExpenseList extends Component {
     console.log(expenses);
     return (
       <div>
-        <Form onSubmit={this.addExpenses} />
+        <Form addExpense={this.addExpense} />
         <SimpleTable expenses={expenses} />
       </div>
     );
