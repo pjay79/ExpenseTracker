@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
@@ -55,24 +54,20 @@ class Form extends Component {
     const {
       name, vendor, cost, confirmed,
     } = this.state;
+    const { onSubmit } = this.props;
     const item = {
       name,
       vendor,
       cost,
       confirmed,
     };
-    try {
-      const response = await axios.post('http://localhost:3001/expenses/add', item);
-      console.log(response.data);
-      this.setState({
-        name: '',
-        vendor: '',
-        cost: 0,
-        confirmed: false,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    onSubmit(item);
+    this.setState({
+      name: '',
+      vendor: '',
+      cost: 0,
+      confirmed: false,
+    });
   };
 
   render() {
@@ -145,6 +140,7 @@ class Form extends Component {
 
 Form.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Form);
