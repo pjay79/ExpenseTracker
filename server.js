@@ -1,10 +1,18 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import logger from 'morgan';
-import mongoose from 'mongoose';
-import path from 'path';
-import routes from './routes';
+// import express from 'express';
+// import cors from 'cors';
+// import bodyParser from 'body-parser';
+// import logger from 'morgan';
+// import mongoose from 'mongoose';
+// import path from 'path';
+// import routes from './routes';
+
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const logger = require('logger');
+const mongoose = require('mongoose');
+const path = require('path');
+const routes = require('./routes');
 
 require('dotenv').config();
 
