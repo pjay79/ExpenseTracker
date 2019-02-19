@@ -7,6 +7,9 @@
     "start-dev": "nodemon --exec babel-node server.js",
     "load": "concurrently \"yarn start-dev \" \"cd client && yarn start\""
   },
+  "engines": {
+    "node": "10.14.1"
+  },
   "description": "Expense Tracker web app server side code",
   "main": "index.js",
   "author": "Praveen Jayarajan",
@@ -17,7 +20,8 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "mongoose": "^5.4.12",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
