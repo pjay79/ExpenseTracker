@@ -19,6 +19,7 @@ module.exports = {
     'global-require': 'off',
     'no-console': 0,
     'no-use-before-define': 0,
+    'no-underscore-dangle': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
 };
