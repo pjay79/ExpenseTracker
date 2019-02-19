@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "scripts": {
-    "start": "babel server.js && node server.js",
+    "start": "node server.js",
     "heroku-postbuild": "cd client && yarn && yarn run build",
     "start-dev": "nodemon --exec babel-node server.js",
     "load": "concurrently \"yarn start-dev \" \"cd client && yarn start\""
@@ -30,7 +30,7 @@
     "@babel/preset-env": "^7.3.1",
     "babel-eslint": "^9.0.0",
     "concurrently": "^4.1.0",
-    "eslint": "5.12.0",
+    "eslint": "^5.12.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",

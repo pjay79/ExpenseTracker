@@ -1,6 +1,3 @@
-// import express from 'express';
-// import Expense from '../models/expense';
-
 const express = require('express');
 const Expense = require('../models/expense');
 
