@@ -11,7 +11,7 @@
     "node": "10.14.1"
   },
   "description": "Expense Tracker web app server side code",
-  "main": "index.js",
+  "main": "server.js",
   "author": "Praveen Jayarajan",
   "license": "MIT",
   "dependencies": {
