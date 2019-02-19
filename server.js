@@ -28,10 +28,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 app.use('/', routes);
-// app.all('*', (req, res) => {
-//   console.log('Returning a 404 from the catch-all route');
-//   return res.sendStatus(404);
-// });
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
