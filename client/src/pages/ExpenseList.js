@@ -35,6 +35,15 @@ export default class ExpenseList extends Component {
     }
   };
 
+  deleteExpense = async (_id) => {
+    try {
+      await axios.delete(`http://localhost:3001/expenses/delete/${_id}`);
+      this.getExpenses();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     const { expenses } = this.state;
     console.log(expenses);

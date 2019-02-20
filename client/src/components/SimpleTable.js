@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+// import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
   root: {
@@ -18,6 +19,10 @@ const styles = theme => ({
   table: {
     minWidth: 700,
     marginBottom: 75,
+  },
+  icon: {
+    margin: theme.spacing.unit,
+    fontSize: 18,
   },
 });
 
@@ -39,6 +44,7 @@ const SimpleTable = (props) => {
           {expenses.map(expense => (
             <TableRow key={expense._id}>
               <TableCell component="th" scope="row">
+                {/* <DeleteIcon className={classes.icon} /> */}
                 {expense.name}
               </TableCell>
               <TableCell align="left">{expense.vendor}</TableCell>

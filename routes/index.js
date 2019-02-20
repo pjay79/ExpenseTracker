@@ -6,21 +6,39 @@ const routes = express.Router();
 routes.get('/expenses', async (req, res) => {
   try {
     const expenses = await Expense.find();
-    return res.json(expenses);
+    res.status(200).send(expenses);
   } catch (err) {
-    console.log(err);
-    return null;
+    res.status(400).send(err);
   }
 });
 
 routes.post('/expenses/add', async (req, res) => {
   try {
-    const expense = await new Expense(req.body);
-    const data = await expense.save(req.body);
-    res.status(200).json({ data });
+    const item = await new Expense(req.body);
+    const expense = await item.save(req.body);
+    res.status(200).send({ data: expense });
   } catch (err) {
-    console.log(err);
-    res.status(400).send('Adding new expense failed.');
+    res.status(400).send(err);
+  }
+});
+
+routes.put('/expenses/update/:id', async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const expense = Expense.findByIdAndUpdate(_id, req.body);
+    res.status(200).send({ data: expense });
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
+routes.delete('/expenses/delete/:id', async (req, res) => {
+  try {
+    const _id = req.params.id;
+    await Expense.findByIdAndRemove(_id);
+    res.status(200).send('Deleted expense successful');
+  } catch (err) {
+    res.status(400).send(err);
   }
 });
 
