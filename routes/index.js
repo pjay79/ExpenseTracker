@@ -22,9 +22,9 @@ routes.post('/expenses/add', async (req, res) => {
   }
 });
 
-routes.put('/expenses/update/:id', async (req, res) => {
+routes.put('/expenses/update/:_id', async (req, res) => {
   try {
-    const _id = req.params.id;
+    const { _id } = req.params._id;
     const expense = Expense.findByIdAndUpdate(_id, req.body);
     res.status(200).send({ data: expense });
   } catch (err) {
@@ -32,9 +32,9 @@ routes.put('/expenses/update/:id', async (req, res) => {
   }
 });
 
-routes.delete('/expenses/delete/:id', async (req, res) => {
+routes.delete('/expenses/delete/:_id', async (req, res) => {
   try {
-    const _id = req.params.id;
+    const { _id } = req.params;
     await Expense.findByIdAndRemove(_id);
     res.status(200).send('Deleted expense successful');
   } catch (err) {

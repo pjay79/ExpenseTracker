@@ -15,6 +15,7 @@ export default class ExpenseList extends Component {
   getExpenses = async () => {
     try {
       const response = await axios.get('http://localhost:3001/expenses/');
+      console.log(response);
       this.setState({ expenses: response.data });
     } catch (err) {
       console.log(err);
@@ -50,7 +51,7 @@ export default class ExpenseList extends Component {
     return (
       <div>
         <Form addExpense={this.addExpense} />
-        <SimpleTable expenses={expenses} />
+        <SimpleTable expenses={expenses} deleteExpense={this.deleteExpense} />
       </div>
     );
   }
