@@ -21,10 +21,6 @@ const styles = theme => ({
     minWidth: 700,
     marginBottom: 75,
   },
-  iconWrapper: {
-    display: 'flex',
-    justifyContent: 'left',
-  },
   icon: {
     margin: theme.spacing.unit,
     fontSize: 18,
@@ -49,7 +45,7 @@ const SimpleTable = (props) => {
         <TableBody>
           {expenses.map(expense => (
             <TableRow key={expense._id}>
-              <TableCell align="left" className={classes.iconWrapper}>
+              <TableCell align="left">
                 <IconButton type="submit" onClick={() => deleteExpense(expense._id)}>
                   <DeleteIcon className={classes.icon} />
                 </IconButton>
