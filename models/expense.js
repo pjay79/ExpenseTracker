@@ -19,6 +19,10 @@ const ExpenseSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Expense = mongoose.model('expense', ExpenseSchema);

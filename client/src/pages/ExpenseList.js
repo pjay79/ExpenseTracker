@@ -12,11 +12,17 @@ export default class ExpenseList extends Component {
     this.getExpenses();
   }
 
+  componentDidUpdate() {
+    this.getExpenses();
+  }
+
   getExpenses = async () => {
     try {
       const response = await axios.get('http://localhost:3001/expenses/');
       console.log(response);
-      this.setState({ expenses: response.data });
+      const expenses = response.data;
+      expenses.sort((a, b) => new Date(b.date) - new Date(a.date));
+      this.setState({ expenses });
     } catch (err) {
       console.log(err);
     }
@@ -29,7 +35,7 @@ export default class ExpenseList extends Component {
       const newExpense = item;
       newExpense._id = _id;
       this.setState(prevState => ({
-        expenses: [...prevState.expenses, newExpense],
+        expenses: [...prevState.expenses.concat(newExpense)],
       }));
     } catch (err) {
       console.log(err);
@@ -39,7 +45,6 @@ export default class ExpenseList extends Component {
   deleteExpense = async (_id) => {
     try {
       await axios.delete(`http://localhost:3001/expenses/delete/${_id}`);
-      this.getExpenses();
     } catch (err) {
       console.log(err);
     }
