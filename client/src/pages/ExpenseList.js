@@ -26,13 +26,7 @@ export default class ExpenseList extends Component {
 
   addExpense = async (item) => {
     try {
-      const response = await axios.post('http://localhost:3001/expenses/add', item);
-      const { _id } = response.data.data;
-      const newExpense = item;
-      newExpense._id = _id;
-      this.setState(prevState => ({
-        expenses: [...prevState.expenses.concat(newExpense)],
-      }));
+      await axios.post('http://localhost:3001/expenses/add', item);
       this.getExpenses();
     } catch (err) {
       console.log(err);
