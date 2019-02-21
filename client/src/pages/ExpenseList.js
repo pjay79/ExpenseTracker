@@ -33,6 +33,7 @@ export default class ExpenseList extends Component {
       this.setState(prevState => ({
         expenses: [...prevState.expenses.concat(newExpense)],
       }));
+      this.getExpenses();
     } catch (err) {
       console.log(err);
     }
